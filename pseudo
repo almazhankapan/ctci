@@ -1,0 +1,227 @@
+
+
+
+class LinkedList: 
+    def __init__(self, head):
+        self.head=head
+    
+    def insert(self, data):
+        new=Node(data, None)
+        if self.head==None: 
+            self.head=new
+        else: 
+            node=self.head
+            while(node.next!=None):
+                node=node.next
+            node.next=new
+
+    def delete(self, data):
+        node=self.head
+        if node==None: 
+            return -1
+        
+        else: 
+            while((node.next).data!=data):
+                node=node.next
+            
+            if (node.next).data==data: 
+                node=node.next.next
+                return 1
+            else: 
+                return -1
+
+
+def removeDuplicates(list):
+    node=list.head
+    buffer=[]
+    if node==None: 
+        return
+    else: 
+        buffer.append(node.data)#113
+        while (node!=None):
+            if node.next.data in buffer: 
+                node.next=node.next.next 
+            node=node.next
+            if node!= None: 
+                buffer.append(node.data)
+
+def checkDuplicate(data,  list):
+    head=list.head
+    if head!=None: 
+        if head.data==data: 
+            head=head.data
+    while(head!=None):
+        if head.next.data==data: 
+            head.next=head.next.next
+            head=head.next
+
+
+
+def removeDuplicatesNoBuf(list):
+    head=list.head
+    node=head
+    if node==None: 
+        return
+    else: 
+        while(node!=None):
+            checkDuplicate(node.data, list)
+            node=node.next
+
+def kthToLast(list, k): 
+    h=list.head
+    length=0
+    while(h!=None): #O(n)
+        h=h.next
+        length+=1
+
+    index=length-k
+    h=list.head
+    i=0
+    while(i!=index): #O(n)
+        h=h.next
+        i+=1
+    return h.data
+
+def deleteMiddle(list):
+    h=list.head
+    length=0
+    while(h!=None): #O(n)
+        h=h.next
+        length+=1
+    if length%2==0:
+        index=length/2
+    else: 
+        index=length/2-1
+    
+    h=list.head
+    i=0
+    while(i!=index-1): #O(n)
+        h=h.next
+        i+=1
+    h.next=h.next.next
+
+
+def partition(list, v):
+    node=list.head
+    largeBuf=[]
+    while(node!=None):
+        if node>v:
+            largeBuf.append(node)
+            node
+
+def sumListsFor(list1,list2):
+    h1=list1.head
+    h2=list2.head
+    num1=num2=""
+    while(h1!=None):
+        num1+=str(h1.data)
+
+    while(h2!=None):
+        num2+=str(h3.data)
+    
+    num1=int(num1)
+    num2=int(num2)
+    sum=num1+num2
+    return sum
+
+def sumListsBack(list1,list2):
+    h1=list1.head
+    h2=list2.head
+    num1=num2=""
+    while(h1!=None):
+        num1+=str(h1.data)
+        h1=h1.next
+
+    while(h2!=None):
+        num2+=str(h2.data)
+        h2=h2.next
+    
+    num1=''.join(reversed(num1))
+    num2=''.join(reversed(num2))
+    sum=num1+num2
+    return sum
+
+def isPalindrome(list):
+    str1=""
+    node=list.head
+    while(node!=None):
+        str1+=(node.data)
+        node=node.next
+    
+    len1=len(str1)#1111111
+    if len1%2==0:
+        mid=len(str1)/2-1
+    else: 
+        mid=int(len(str1)/2)
+
+    first=str1[0:mid]
+    second="".join(reversed(str1[mid:len1]))
+    if first==second: 
+        return True
+    else: 
+        return False
+
+def intersect(l1,l2):
+    start1=l1.head
+    start2=l1.head
+
+
+    while(start1.next!=None):
+        start1=start1.next
+
+    while(start2.next!=None):
+        start2=start2.next
+    
+    if start1==start2:
+        return True
+    else: 
+        return False
+
+
+def loopDetect(list):
+    buffer=[]
+    node=list.head
+    while(node!=None):
+        if node in buffer: 
+            return True
+        else: 
+            buffer.append(node)
+            node=node.next
+
+    return False
+
+
+    
+    
+
+    
+    
+        
+
+
+#1-->2-->4-->7-->None
+getD(1)-->d(2)--d(4)---d(7)---None
+
+str+=7
+
+
+        
+        
+
+
+
+
+    
+
+
+
+
+
+
+                
+
+
+
+
+
+            
