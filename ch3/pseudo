@@ -1,0 +1,27 @@
+class Stack: 
+    class Node: 
+        def __init__(self, data, next):
+            self.data=data
+            self.next=next
+    
+    def __init__(self):
+        self.top=None
+        size=0
+        
+    
+    def insert(d):
+        newN=Node(d,self.top)
+        self.top=newN
+        size+=1
+    
+    def pop():
+        if self.top==None: 
+            return None
+        else: 
+            d=self.top.data
+            self.top=self.top.next
+            size-=1
+            return d
+
+def popMin(stack):
+        

@@ -9,7 +9,7 @@ class ListNode(object):
             self=self.next
         print()
 
-def oddEvenList(self, head):
+def oddEvenList(head):
     """
     :type head: ListNode
     :rtype: ListNode
