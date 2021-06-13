@@ -46,7 +46,7 @@ class Stack:
 def sort(old): 
     new=Stack()
     #we are first sorting in ascending -- largest is top
-    while(not new.isEmpty()):
+    while(not old.isEmpty()):
         tmp=old.pop()
         #we are transfering from old to placeholder
         #pop from new and push back to old
@@ -77,6 +77,7 @@ def main():
     st.print()
     sort(st)
     st.print()
+    print("top-is"+str(st.top.data))
 
 
 
