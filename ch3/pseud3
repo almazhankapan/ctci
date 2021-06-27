@@ -1,0 +1,27 @@
+Stack: 
+    Node: 
+        def__init__(self, value, next):
+            self.value=value
+            self.next=next
+    def__init__(self):
+        self.top=None
+    
+    def push(self, value):
+        #for stack it's a<-b<-c<-top<-newtop
+        n=self.Node(value, self.top)
+        self.top=n
+    
+    def pop(self):
+        d=self.top.data
+        self.top=self.top.next
+
+def main():
+    st=Stack()
+    st.push(4)
+    st.push(5)
+    st.push(7)
+    print(st.pop())
+
+if __name__=="__main__":
+    main()
+    
