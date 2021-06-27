@@ -51,9 +51,8 @@ class BinaryTree:
         print(str(node.value)+"-")
     
     
-
 def main():
     tree=Tree()
-    tree.root.add(5)
+    tree.root.add(9)
     
     
