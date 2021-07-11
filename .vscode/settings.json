@@ -1,0 +1,3 @@
+{
+  "python.analysis.extraPaths": ["./ch2-linked-list/linkedlist.py"]
+}
