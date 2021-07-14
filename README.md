@@ -1,2 +1,2 @@
-# CTCI, leetcode solutions
+# CTCI
 reslv-2-wkss! 
