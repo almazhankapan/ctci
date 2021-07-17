@@ -1,88 +1,97 @@
-class Stack: 
-    class MinStack: 
+class MinStack: 
+    #key is that MinStack class contains a stack subclass
+    #but is not a stack itself--its rather a wrapper for stack subclass
+    # and push, pop are made through push, pop calls to the stack subclass;
+    # minstack has mins array which tracks local min element for each stack element
+    class Stack: 
         class Node: 
             def __init__(self, value, next):
                 self.value=value
                 self.next=next
-
         def __init__(self):
-            self.top=None
-            self.min=None
+            self.head=None
 
         def push(self, value):
-            newN=self.Node(value, self.top)
-            self.top=newN
-
+            newN=self.Node(value, self.head)
+            self.head=newN
+    
         def pop(self):
-            v=self.top.value
-            self.top=self.top.next
-            return v
+            if self.head==None: 
+                return None
+            else: 
+                v=self.head
+                self.head=self.head.next
+                return v
+
+        def isEmpty(self):
+            return self.head==None
 
         def peek(self):
-            v=self.top.value
-            return v
-
+            if self.head==None: 
+                return None
+            else: 
+                v=self.head
+                return v
     def __init__(self):
-        self.top=None
-        self.min=None
-        self.minStack=self.MinStack()
-
-    def push(self, value):
-        newN=self.MinStack.Node(value, self.top)
-        self.top=newN
-        if self.min==None: 
-            self.min=newN
-            self.minStack.push(newN.value)
-        else: 
-            if self.min.value>newN.value: 
-                self.min=newN
-                self.minStack.push(newN.value)
-
-    def pop(self):
-        v=self.top.value
-        #retrieve the next min if top is min
-        if self.minStack.top==self.top: 
-            self.minStack.pop()
-            self.min=self.minStack.top
-        
-        self.top=self.top.next
-        return v
-
-    def peek(self):
-        v=self.top.value
-        return v
+        self.minstack=self.Stack()
+        self.mins=[]
     
-    def minE(self):
-        return self.min
+    def push(self, value):
+        self.minstack.push(value)
+        if len(self.mins)==0:
+            self.mins.append(value)
+        else: #track local min
+            if self.mins[-1]>value: 
+                self.mins.append(value)
+            else: 
+                self.mins.append(self.mins[-1])
+    
+    def pop(self):
+        v=self.minstack.pop()
+        self.mins.pop()
     
     def isEmpty(self):
-        return self.top==None
+        return self.minstack.isEmpty()
     
+    def peek(self):
+        return self.minstack.peek()
+    
+    def getmin(self):
+        return self.mins[-1]
+
     def print(self):
-        t=self.top
-        while(t!=None):
-            print(str(t.value)+"-",end="")
-            t=t.next
+        h=self.minstack.head
+        while(h!=None):
+            print(str(h.value) +"=>",end="")
+            h=h.next
         print()
+    
+    
+    
+
+
 
 
 def main():
-    s=Stack()
+
+    s=MinStack()
     s.push(4)
+    s.push(7)
     s.push(3)
-    s.push(6)
     s.push(2)
-    print("min is"+str(s.minE().value))
+    s.push(5)
+    print(s.getmin())
     s.print()
     s.pop()
     s.print()
-    print("min is"+str(s.minE().value) )
-
+    print(s.getmin())
+    s.pop()
+    s.print()
+    print(s.getmin())
+   
 
 
 
 if __name__=="__main__":
     main()
-
-
 

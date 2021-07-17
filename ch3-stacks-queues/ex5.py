@@ -7,8 +7,24 @@ class Stack:
         self.head=None
     
     def push(self, value):
-        newN=self.Node(value, self.head)
-        self.head=newN
+        newN=self.Node(value, None)
+        if self.head==None: 
+            newN.next=self.head
+            self.head=newN
+        else: 
+            if value<self.head.value: 
+                newN.next=self.head
+                self.head=newN
+            else: 
+                h=self.head
+                while(h.next!=None):
+                    if (h.next.value>=value):
+                        break
+                    else: 
+                        h=h.next
+                newN.next=h.next
+                h.next=newN            
+
     
     def pop(self):
         if self.head==None: 
