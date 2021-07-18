@@ -1,5 +1,5 @@
 class Queue: 
-    class Node: 
+    class NodeQueue: 
         def __init__(self, value, next):
             self.value=value
             self.next=next
@@ -9,7 +9,7 @@ class Queue:
         self.tail=None
 
     def enqueue(self, value):
-        newN=self.Node(value, None)
+        newN=self.NodeQueue(value, None)
         if self.tail==None and self.head==None: 
             self.tail=newN
             self.head=newN
@@ -28,7 +28,7 @@ class Queue:
         return self.head==None
 
 class LinkedList: 
-    class Node: 
+    class NodeList: 
         def __init__(self, value, next):
             self.value=value
             self.next=next
@@ -37,7 +37,7 @@ class LinkedList:
         self.head=None
     
     def insert(self, value):
-        newN=self.Node(value, None)
+        newN=self.NodeList(value, None)
         h=self.head
         if h==None: 
             self.head=newN
@@ -63,38 +63,52 @@ class LinkedList:
         print()
 
 class Node: 
-    def __init__(self, value):
+    def __init__(self, value, left=None, right=None):
         self.value=value
-        self.left=None
-        self.right=None
+        self.left=left
+        self.right=right
         self.visited=False
-    
-    def add_child(self, Node):
-        if self.left!=None: 
-            self.right=Node
-        else: 
-            self.left=Node
-
+    #insert in binary tree should be breadth first search
+    def add(self, root, node):
+        q=Queue()
+        q.enqueue(root)
+        while(not q.isEmpty()):
+            r=q.dequeue()
+            if r.left==None: 
+                r.left=node
+                return
+            elif r.right==None: 
+                r.right=node
+                return
+            else: 
+                q.enqueue(r.left)
+                q.enqueue(r.right)
 
 def listOfDepths(root):
-    lists=[]
-    if root==None: 
-        return
+    '''
+            5
+        2        5
+    4     7   8     11
+    
+    '''
+    arr=[]
     ll=LinkedList()
-    ll.insert(root.value)
-    lists.append(ll)
+    ll.append(root)
+    arr.append(ll)
     q=Queue()
     q.enqueue(root)
     root.visited=True
+    queue=[1,2,3,4,5,6]
     while(not q.isEmpty()):
         r=q.dequeue()
-        ll1=LinkedList()
-        ll1.insert(r)
-        lists.append(ll1)
-        if r.left.visited==False: 
-            q.enqueue(r.left)
-            ll2=LinkedList()
-            ll2.insert(r.left)
-        if r.right.visited==False: 
-            ll2.insert(r.right)
-            q.enqueue(r.right)
+        r.visited=True
+        ll=LinkedList()
+        if r.left!=None and r.left.visited==False: 
+            ll.append(r.left)
+        if r.right!=None and r.right.visited==False: 
+            ll.append(r.right)
+        
+
+        
+
+         

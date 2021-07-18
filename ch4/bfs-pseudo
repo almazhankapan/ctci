@@ -1,0 +1,14 @@
+def bfs(root):
+    q=new Queue()
+    visit(q)
+    q.enqueue(root)
+    q.visited=False
+    while(q not empty):
+        r=q.dequeue()
+        visit(r)
+        for x in r.adjacent: 
+            if x not visited: 
+                //marking happens here! when enqueuei
+                x.visited=true
+                q.enquque(x)
+

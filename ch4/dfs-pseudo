@@ -1,0 +1,29 @@
+
+
+def dfs(node):
+    #dont forget about null node
+    if node==null: 
+        return
+    visit(node)
+    node.visited=True
+    for x in node.adjacent: 
+        if x not visited: 
+            dfs(node)
+
+def inorder(node):
+    if node!=None: 
+        inorder(node.left)
+        inorder(node)
+        inorder(node.right)
+
+def preorder(node):
+    if node!=None: 
+        inorder(node.left)
+        inorder(node.right)
+        inorder(node)
+
+def postorder(node):
+    if node!=None: 
+        inorder(node)
+        inorder(node.left)
+        inorder(node.right)
