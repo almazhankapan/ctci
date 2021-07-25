@@ -1,0 +1,20 @@
+def bfs(node):
+    if node==None: 
+        return
+    visit(node)#happens here
+    node.visited=true
+    for child in node.children: 
+        if child.visited==False: 
+            bfs(child)
+
+def dfs(node):
+    q=Queue()
+    q.enqueue(node)
+    node.visited=true
+    while(not q.isEmpty()):
+        r=q.dequeue()
+        visit(r)#visit happens beFORE the FOR loop
+        for child in r.children: 
+            if child.visited==False: 
+                q.enqueue(child)
+                child.visited=True
