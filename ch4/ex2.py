@@ -1,67 +1,65 @@
 class BST: 
-    class Node: 
+    class TreeNode: 
         def __init__(self, value):
             self.value=value
             self.left=None
             self.right=None
-            self.visited=False
     def __init__(self):
         self.root=None
-    
-    def add(self, node):
+    def insert(self, value):
         if self.root==None: 
-            self.root=node
-            return
+            self.root=self.TreeNode(value)
         else: 
-            self.preorder_add(self, self.root, node)
-    
+            self.insertHelper(self.root, value)
+    def insertHelper(self, node, value):
+        if value<node.value:
+            if node.left==None: 
+                node.left=self.TreeNode(value)
+                return
+            else: 
+                self.insertHelper(node.left, value) 
+        else: 
+            if node.right==None: 
+                node.right=self.TreeNode(value)
+                return
+            else: 
+                self.insertHelper(node.right, value) 
+
     def print(self):
-        out=self.inorder_print(self.root, "")
-        print(out[0:(len(out)-1)])
+        print(self.inorder_print(self.root, ""))
+    
+    def inorder_print(self, node, out):
+        if node!=None: 
+            out=self.inorder_print(node.left, out)
+            out+=str(node.value)+"-"
+            out=self.inorder_print(node.right, out)
+        return out
+    
+    def buildMinTreeWrap(self, array):
+        self.root=self.buildMinTree(array)
 
-    def preorder_add(self, root, node):
-        if root.value<=node.value: 
-            if root.left==None: 
-                root.left=node
-            else: 
-                self.preorder_add(root.left, node)
-        else: 
-            if root.right==None: 
-                root.right=node
-            else: 
-                self.preorder_add(root.right, node)
-
-    def inorder_print(self, root, traversal):
-        if root!=None: 
-            traversal=self.inorder_print(root.left, traversal)
-            traversal+=str(root.value)+"-"
-            traversal=self.inorder_print(root.right, traversal)
-        return traversal
-
+    
     def buildMinTree(self, array):
-        self.root=self.minTreeHelper(array)
-        #            5
-        #        4       7
-        #    1     3   6    9
-
-    def minTreeHelper(self, array): 
-        mid=int(len(array)/2)#3 #1 #0
-        #important!!make sure to create the node! 
-        root=self.Node(array[mid])#5 #4 # #1
+        mid=int(len(array)/2)
+        root=self.TreeNode(array[mid])
+        #important--return root if mid is 0 since
+        #its an empty node by that time
         if mid==0:
-            return root #return the element if mid=0
-        root.left=self.minTreeHelper(array[0:mid]) #1
-        root.right=self.minTreeHelper(array[(mid+1): (len(array))])
+            return root
+        
+        root.left=self.buildMinTree(array[0:mid])
+        #very important--from mid+1 to end
+        root.right=self.buildMinTree(array[(mid+1):len(array)])
+        #return root after both left and right branches are done
         return root
     
 
 def main():
     t=BST()
-    t.buildMinTree([1,2,3,4,5,6,7])
+    t.buildMinTreeWrap([1,2,3,4,5,6,7])
     t.print()
 
 
 
 if __name__=="__main__":
     main()
-    
